@@ -12,8 +12,8 @@ class FakultasController extends Controller
      */
     public function index()
     {
-        $fakultas = ["FIKR", "FEB"];
-        return view ('fakultas.index')
+        $fakultas = Fakultas::all(); // select * from fakultas
+        return view('Fakultas.index')
                 ->with('fakultas', $fakultas);
     }
 
@@ -22,7 +22,7 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        //
+        return view('fakultas.create');
     }
 
     /**
@@ -30,7 +30,16 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       // dd($request);
+       // validasi form
+       $val = $request->validate([
+        'nama'=> "required|unique:fakultas",
+        'singkatan'=> "required|max:4"
+       ]);
+
+       Fakultas::create($val);
+
+       return redirect()->route('fakultas.index')->with('success',$val['nama'].' berhasil disimpan');
     }
 
     /**
