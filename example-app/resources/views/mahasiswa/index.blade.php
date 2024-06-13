@@ -40,6 +40,7 @@
                             <td>{{ $item["alamat"]}}</td>
                             <td>{{ $item["prodi"]['nama']}}</td>
                             <td>
+                          
                               <form action="{{ route('mahasiswa.destroy', $item["id"])}}" method="post">
                               @method('DELETE')
                               @csrf
