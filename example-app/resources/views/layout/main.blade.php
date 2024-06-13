@@ -28,7 +28,7 @@
           <span></span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="{{ url('dashboard')}}">
             <i class="mdi mdi-view-quilt menu-icon"></i>
             <span class="menu-title">Dashboard</span>
             <div class="badge badge-info badge-pill">2</div>
@@ -47,7 +47,7 @@
           </a>
         </li>
          <li class="nav-item">
-          <a class="nav-link" href="{{ url('Mahasiswa') }}">
+          <a class="nav-link" href="{{ url('mahasiswa') }}">
                 <i class="mdi mdi-view-quilt menu-icon"></i>
                 <span class="menu-title">Mahasiswa</span>
           </a>
@@ -138,10 +138,10 @@
             <a class="navbar-brand brand-logo" href="index.html"><img src="{{ url('images/logo.svg')}}" alt="logo"/></a>
             <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ url('images/logo-mini.svg')}}" alt="logo"/></a>
           </div>
-          <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back, Brandon Haynes</h4>
+          <h4 class="font-weight-bold mb-0 d-none d-md-block mt-1">Welcome back, {{auth()->user()->name}}</h4>
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item">
-              <h4 class="mb-0 font-weight-bold d-none d-xl-block">Mar 12, 2019 - Apr 10, 2019</h4>
+              <h4 class="mb-0 font-weight-bold d-none d-xl-block">Jun 13, 2024- Jul 10, 2024</h4>
             </li>
             <li class="nav-item dropdown mr-1">
               <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
@@ -155,34 +155,34 @@
                       <img src="{{ url('images/faces/face4.jpg')}}" alt="image" class="profile-pic">
                   </div>
                   <div class="preview-item-content flex-grow">
-                    <h6 class="preview-subject ellipsis font-weight-normal">David Grey
+                    <h6 class="preview-subject ellipsis font-weight-normal">Gilang
                     </h6>
                     <p class="font-weight-light small-text text-muted mb-0">
-                      The meeting is cancelled
+                      Maaf tidak dapat ikut meeting
                     </p>
                   </div>
                 </a>
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
-                      <img src="{{ url('images/faces/face2.jpg') }}" alt="image" class="profile-pic">
+                      <img src="{{ url('images/faces/face2.png') }}" alt="image" class="profile-pic">
                   </div>
                   <div class="preview-item-content flex-grow">
-                    <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
+                    <h6 class="preview-subject ellipsis font-weight-normal">Riski
                     </h6>
                     <p class="font-weight-light small-text text-muted mb-0">
-                      New product launch
+                      produk baru kamu bagus
                     </p>
                   </div>
-                </a>
+                </a>  
                 <a class="dropdown-item preview-item">
                   <div class="preview-thumbnail">
                       <img src="{{ url('images/faces/face3.jpg') }}" alt="image" class="profile-pic">
                   </div>
                   <div class="preview-item-content flex-grow">
-                    <h6 class="preview-subject ellipsis font-weight-normal"> Johnson
+                    <h6 class="preview-subject ellipsis font-weight-normal"> Abiyu
                     </h6>
                     <p class="font-weight-light small-text text-muted mb-0">
-                      Upcoming board meeting
+                      tunggu aku meeting 
                     </p>
                   </div>
                 </a>
@@ -253,17 +253,24 @@
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                 <img src="{{ url('images/faces/face5.jpg') }}" alt="profile"/>
-                <span class="nav-profile-name">Eleanor Richardson</span>
+                <span class="nav-profile-name">{{auth()->user()->name}}</span>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                 <a class="dropdown-item">
                   <i class="mdi mdi-settings text-primary"></i>
                   Settings
                 </a>
-                <a class="dropdown-item">
-                  <i class="mdi mdi-logout text-primary"></i>
-                  Logout
-                </a>
+               
+                 <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();" class="dropdown-item">
+                              <i class="mdi mdi-logout text-primary"></i>  {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
               </div>
             </li>
             <li class="nav-item">
